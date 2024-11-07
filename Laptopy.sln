@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laptopy", "Laptopy\Laptopy.csproj", "{2A7177CF-859A-4113-B17F-CDD4CFADC8F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaptopyEF", "LaptopyEF\LaptopyEF.csproj", "{9F883FC7-536E-416E-BEB3-5A547E98636A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaptopyCore", "LaptopyCore\LaptopyCore.csproj", "{68858939-16EA-457A-8E47-ADC8ECD09750}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A7177CF-859A-4113-B17F-CDD4CFADC8F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7177CF-859A-4113-B17F-CDD4CFADC8F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7177CF-859A-4113-B17F-CDD4CFADC8F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7177CF-859A-4113-B17F-CDD4CFADC8F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F883FC7-536E-416E-BEB3-5A547E98636A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F883FC7-536E-416E-BEB3-5A547E98636A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F883FC7-536E-416E-BEB3-5A547E98636A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F883FC7-536E-416E-BEB3-5A547E98636A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68858939-16EA-457A-8E47-ADC8ECD09750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68858939-16EA-457A-8E47-ADC8ECD09750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68858939-16EA-457A-8E47-ADC8ECD09750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68858939-16EA-457A-8E47-ADC8ECD09750}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A988696-8B16-4EB7-8A0D-D946B9EB208E}
+	EndGlobalSection
+EndGlobal
