@@ -22,27 +22,37 @@ namespace Laptopy.Controllers
 
        
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("GetAll")]
+        public IActionResult Index()
         {
-            var categories = _mapper.Map<IEnumerable<CategoryDTO>>(_unitOfWorkRepository.Categories);
-
-            if (categories!=null)
+          
+            var categories = _unitOfWorkRepository.Categories.Get().ToList();
+            if (categories != null)
             {
                 return Ok(categories);
-
             }
             else
             {
                 return NotFound();
             }
+
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetAll(int id)
+        [HttpGet("Details")]
+        public IActionResult Details(int id)
         {
-            var category = _mapper.Map<CategoryDTO>(_unitOfWorkRepository.Categories.Get(c=>c.Id==id).FirstOrDefault());
-            if (category!=null)
+            //var category = _mapper.Map<CategoryDTO>(_unitOfWorkRepository.Categories.Get(c=>c.Id==id).FirstOrDefault());
+            //if (category!=null)
+            //{
+            //    return Ok(category);
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+
+            var category = _unitOfWorkRepository.Categories.Get(c => c.Id == id).FirstOrDefault();
+            if (category != null)
             {
                 return Ok(category);
             }
@@ -50,19 +60,58 @@ namespace Laptopy.Controllers
             {
                 return NotFound();
             }
+
         }
 
-        [HttpPost]
-        public IActionResult Create(CategoryDTO  categoryDTO)
+        [HttpPost("Create")]
+        public IActionResult Create(Category  category)
         {
             if (ModelState.IsValid)
             {
-                var category = _mapper.Map<Category>(categoryDTO);
+                //var category = _mapper.Map<Category>(categoryDTO
                 _unitOfWorkRepository.Categories.Create(category);
                 _unitOfWorkRepository.SaveChanges();
-                return Ok();
+                return Created($"{Request.Scheme}://{Request.Host}/api/Category/Details?categoryId={category.Id}", category);
             }
             return BadRequest();
         }
+
+        [HttpPut("Edit")]
+        public IActionResult Edit(Category category)
+        {
+            var existingCategory = _unitOfWorkRepository.Categories.Get(c => c.Id == category.Id,null,false).FirstOrDefault();
+
+            if (existingCategory != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    _unitOfWorkRepository.Categories.Edit(category);
+                    _unitOfWorkRepository.SaveChanges();
+                    return Created($"{Request.Scheme}://{Request.Host}/api/Category/Details?categoryId={category.Id}", category);
+                }
+                return BadRequest();
+            }
+            else
+            {
+                return NotFound();
+
+            }
+
+
+        }
+        [HttpDelete("Delete")]
+        public IActionResult Delete(int categoryId)
+        {
+            var category = _unitOfWorkRepository.Categories.Get(c => c.Id == categoryId).FirstOrDefault();
+            if (category!= null)
+            {
+                _unitOfWorkRepository.Categories.Delete(category);
+                _unitOfWorkRepository.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
     }
+
 }
