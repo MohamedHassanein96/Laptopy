@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace LaptopyCore.Model
@@ -16,7 +18,10 @@ namespace LaptopyCore.Model
         public string Description { get; set; } 
         public List<ProductImages> ProductImages { get; set; } 
         public string Model { get; set; } 
+        public Decimal Rating { get; set; }
         public int CategoryID { get; set; }
+        [ValidateNever]
+        [JsonIgnore]
         public Category Category { get; set; } = null!;
     }
 }

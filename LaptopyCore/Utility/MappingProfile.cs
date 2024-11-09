@@ -15,9 +15,11 @@ namespace LaptopyCore.Utility
         {
             CreateMap<Cart, CartDTO>().ReverseMap();
             CreateMap<Product, ProductDTO>().ReverseMap();
-            CreateMap<ProductImages, ProductImagesDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<ContactUs, ContactUsDTO>().ReverseMap();
+            CreateMap<ProductImages, ProductImagesDTO>().ReverseMap();
+
+
 
         }
     }

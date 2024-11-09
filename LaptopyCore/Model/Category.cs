@@ -11,6 +11,8 @@ namespace LaptopyCore.Model
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+
+
         [JsonIgnore]
         public IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
     }

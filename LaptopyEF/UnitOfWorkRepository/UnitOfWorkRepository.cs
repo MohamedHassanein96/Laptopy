@@ -1,8 +1,10 @@
 ﻿using LaptopyCore.IRepository.IBaseRepository;
+using LaptopyCore.IRepository.IProductRepository;
 using LaptopyCore.IUnitOfWorkRepository;
 using LaptopyCore.Model;
 using LaptopyEF.Data;
 using LaptopyEF.Repository.BaseRepository;
+using LaptopyEF.Repository.ProductRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +18,7 @@ namespace LaptopyEF.UnitOfWorkRepository
 {
     public class UnitOfWorkRepository : IUnitOfWorkRepository
     {
-        public IBaseRepository<Product> Products { get; private set; }
+        //public IBaseRepository<Product> Products { get; private set; }
 
         public IBaseRepository<ProductImages> ProductImages { get; private set; }
 
@@ -26,6 +28,8 @@ namespace LaptopyEF.UnitOfWorkRepository
 
         public IBaseRepository<Cart> Carts { get; private set; }
 
+        public IProductRepository Products { get; private set; }
+
         private readonly ApplicationDbContext _context;
         public UnitOfWorkRepository(ApplicationDbContext context)
         {
@@ -34,11 +38,12 @@ namespace LaptopyEF.UnitOfWorkRepository
         }
         private void InitializeRepositories()
         {
-            Products = CreateRepository<Product>();
+            //Products = CreateRepository<Product>();
             ProductImages = CreateRepository<ProductImages>();
             Categories = CreateRepository<Category>();
             ContactUs = CreateRepository<ContactUs>();
             Carts = CreateRepository<Cart>();
+            Products = new ProductRepository(_context);
         }
 
         private IBaseRepository<T> CreateRepository<T>() where T : class
