@@ -16,9 +16,6 @@ namespace Laptopy.Controllers
         private readonly IUnitOfWorkRepository _unitOfWorkRepository;
         private readonly IMapper _mapper;
 
-
-
-
         public ProductController(IUnitOfWorkRepository unitOfWorkRepository, IMapper mapper)
         {
             _unitOfWorkRepository = unitOfWorkRepository;
@@ -123,55 +120,6 @@ namespace Laptopy.Controllers
         }
 
 
-        [HttpGet("GetByModel")]
-        public IActionResult GetByModel(string? model=null)
-        {
-            var products = _unitOfWorkRepository.Products.Get(null, query => query.Include(p => p.ProductImages)).ToList();
-
-            if (model!=null)
-            {
-               var filterModel =_unitOfWorkRepository.Products.Get(e => e.Model.Contains(model.Trim()));
-                return Ok(filterModel);
-            }
-            else
-            {
-                return Ok(products);
-            }
-          
-        }
-
-        [HttpGet("GetByPrice")]
-        public IActionResult SearchByPriceRange(int minPrice = 0, int maxPrice = 0)
-        {
-            if (minPrice==0 && maxPrice ==0)
-            {
-                    var allProducts = _unitOfWorkRepository.Products.Get().ToList();
-                    return Ok(allProducts);
-            }
-            else
-            {
-                var products = _unitOfWorkRepository.Products.GetByPriceRange(
-                minPrice: minPrice,
-                maxPrice: maxPrice,
-                include: query => query.Include(p => p.ProductImages));
-                return Ok(products);
-            }
-
-        }
-        [HttpGet("GetByRating")]
-        public IActionResult GetByRating(int rate)
-        {
-            var products = _unitOfWorkRepository.Products.Get().ToList();
-            if (rate == 0)
-            {
-                return Ok(products);
-
-            }
-            else
-            {
-               var productsByRating =_unitOfWorkRepository.Products.Get(p=>p.Rating==rate).ToList();
-                return Ok(productsByRating);
-            }
-        }
+   
     }
 }
