@@ -18,8 +18,7 @@ namespace LaptopyCore.Utility
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<ContactUs, ContactUsDTO>().ReverseMap();
             CreateMap<ProductImages, ProductImagesDTO>().ReverseMap();
-
-
+            CreateMap<ApplicationUser, ApplicationUserDTO>().ReverseMap();
 
         }
     }
