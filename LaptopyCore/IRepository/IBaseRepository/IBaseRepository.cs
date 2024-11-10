@@ -9,7 +9,7 @@ namespace LaptopyCore.IRepository.IBaseRepository
 {
     public interface IBaseRepository<T> where T : class
     {
-        public IEnumerable<T> Get(
+       public IEnumerable<T> Get(
        Expression<Func<T, bool>>? expression = null,
        Func<IQueryable<T>, IQueryable<T>>? includes = null,
        bool tracked = true

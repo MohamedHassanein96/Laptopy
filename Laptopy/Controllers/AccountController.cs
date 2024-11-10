@@ -87,7 +87,7 @@ namespace Laptopy.Controllers
         [HttpDelete("Logout")]
         public async Task<IActionResult> Logout()
         {
-            _SignInManager.SignOutAsync();
+           await _SignInManager.SignOutAsync();
             return Ok();
 
         }
