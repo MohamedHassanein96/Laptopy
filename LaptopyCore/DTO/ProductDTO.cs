@@ -24,5 +24,8 @@ namespace LaptopyCore.DTO
         public Decimal Rating { get; set; }
 
         public int CategoryID { get; set; }
+        public bool IsNewArrival { get; set; }
+        public bool IsTrending { get; set; }
+        public bool IsSpecial { get; set; }
     }
 }

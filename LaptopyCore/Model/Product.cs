@@ -23,5 +23,8 @@ namespace LaptopyCore.Model
         [ValidateNever]
         [JsonIgnore]
         public Category Category { get; set; } = null!;
+        public bool IsNewArrival { get; set; }
+        public bool IsTrending { get; set; }
+        public bool IsSpecial { get; set; }
     }
 }

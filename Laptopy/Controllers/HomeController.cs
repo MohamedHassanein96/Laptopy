@@ -22,18 +22,30 @@ namespace Laptopy.Controllers
         [HttpGet("GetAll")]
         public IActionResult Index(string? query = null)
         {
+            var newArrivals = _unitOfWorkRepository.Products.Get(p => p.IsNewArrival);
+            var trendingProducts = _unitOfWorkRepository.Products.Get(p => p.IsTrending);
+            var specialProducts = _unitOfWorkRepository.Products.Get(p => p.IsSpecial );
+
+            var result = new
+            {
+                NewArrivals = newArrivals,
+                TrendingProducts = trendingProducts,
+                SpecialProducts = specialProducts
+            };
 
             IQueryable<Product> products = _unitOfWorkRepository.Products.Get(null, query => query.Include(p => p.ProductImages)).AsQueryable();
 
             if (!string.IsNullOrEmpty(query))
             {
-                products = products.Where(m => m.Name.Contains(query.Trim()));
+                products = products.Where(m => m.Name.ToLower().Contains(query.Trim().ToLower()));
+                return Ok(products);
             }
             else
             {
-                return Ok(products);
+                return Ok(result);
+
             }
-            return Ok(products);
+
         }
 
         [HttpGet("Details")]
