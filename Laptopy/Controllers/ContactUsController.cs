@@ -19,16 +19,19 @@ namespace Laptopy.Controllers
         [HttpPost("Create")]
         public IActionResult Create(ContactUs contactUs)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+
             if (ModelState.IsValid)
             {
                 _unitOfWorkRepository.ContactUs.Create(contactUs);
                 _unitOfWorkRepository.SaveChanges();
                 return Ok();
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
         [HttpGet("GetAll")]
         public IActionResult Index()

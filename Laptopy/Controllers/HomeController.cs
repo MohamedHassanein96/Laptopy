@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LaptopyCore.IUnitOfWorkRepository;
+using LaptopyCore.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,19 +20,20 @@ namespace Laptopy.Controllers
             _mapper = mapper;
         }
         [HttpGet("GetAll")]
-        public IActionResult Index()
+        public IActionResult Index(string? query = null)
         {
 
-            var products = _unitOfWorkRepository.Products.Get(null, query => query.Include(p => p.ProductImages)).ToList();
-            if (products != null)
+            IQueryable<Product> products = _unitOfWorkRepository.Products.Get(null, query => query.Include(p => p.ProductImages)).AsQueryable();
+
+            if (!string.IsNullOrEmpty(query))
             {
-                return Ok(products);
+                products = products.Where(m => m.Name.Contains(query.Trim()));
             }
             else
             {
-                return NotFound();
+                return Ok(products);
             }
-
+            return Ok(products);
         }
 
         [HttpGet("Details")]
